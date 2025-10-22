@@ -1,0 +1,59 @@
+@startuml Quiz System Class Diagram
+
+' Define the classes with attributes and methods
+class GenerateId {
+  - _generateId: Uuid
+  + genterIdV4(): String
+}
+
+class Question {
+  - id: String
+  - title: String
+  - choices: List<String>
+  - goodChoice: String
+  - points: int
+  + Question(id?: String, title: String, choices: List<String>, goodChoice: String, points: int)
+  + {static} findQuestionById(questions: List<Question>, id: String): Question?
+}
+
+class Answer {
+  - questionId: String
+  - answerChoice: String
+  - id: String
+  + Answer(id?: String, questionId: String, answerChoice: String)
+  + {static} findQuestionByid(answers: List<Answer>, id: String): Answer?
+  + isGood(question: Question): bool
+}
+
+class Player {
+  - username: String
+  - answer: List<Answer>
+  - id: String
+  - scores: int
+  + Player(id?: String, username: String)
+  + addAnswer(answer: Answer): void
+  + {static} findPlayerById(players: List<Player>, id: String): Player?
+  + getLastScorePlayer(questions: List<Question>): int
+}
+
+class Quiz {
+  - questions: List<Question>
+  - player: List<Player>
+  - id: String
+  + Quiz(id?: String, questions: List<Question>)
+  + addPlayer(newPlayer: Player): void
+}
+
+' Define inheritance relationships
+Question --|> GenerateId
+Answer --|> GenerateId
+Player --|> GenerateId
+Quiz --|> GenerateId
+
+' Define associations
+Quiz "1" *-- "many" Question : contains
+Quiz "1" *-- "many" Player : has
+Player "1" *-- "many" Answer : answers
+Answer --> Question : references
+
+@enduml
