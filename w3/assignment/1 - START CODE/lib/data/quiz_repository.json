@@ -1,0 +1,84 @@
+{
+  "id": "1330cb0a-64f8-4e20-a757-dc169ee724a3",
+  "questions": [
+    {
+      "id": "6d8749f1-9e89-4395-9af5-d30e814fcce3",
+      "title": "Capital of France?",
+      "choices": [
+        "Paris",
+        "London",
+        "Rome"
+      ],
+      "goodChoice": "Paris",
+      "points": 10
+    },
+    {
+      "id": "fd1ecce5-26a4-45eb-a391-44405ee3e0cc",
+      "title": "2 + 2 = ?",
+      "choices": [
+        "2",
+        "4",
+        "5"
+      ],
+      "goodChoice": "4",
+      "points": 50
+    },
+    {
+      "id": "1ae11cbd-1d43-4442-bf9e-d337c6ecf29a",
+      "title": "What is the capital of Japan?",
+      "choices": [
+        "Tokyo",
+        "Osaka",
+        "Kyoto"
+      ],
+      "goodChoice": "Tokyo",
+      "points": 10
+    }
+  ],
+  "player": [
+    {
+      "id": "292280ce-56e7-4158-aab1-8a1fc1b05e6e",
+      "username": "rayu",
+      "score": 50,
+      "answers": [
+        {
+          "id": "bb8a863d-de6c-4517-aafd-6240d9b5577f",
+          "questionId": "bb8a863d-de6c-4517-aafd-6240d9b5577f",
+          "answerChoince": "p 4"
+        },
+        {
+          "id": "7d5ead7f-ea76-42b6-829b-4b0d53ca31ce",
+          "questionId": "7d5ead7f-ea76-42b6-829b-4b0d53ca31ce",
+          "answerChoince": "4"
+        },
+        {
+          "id": "3ed967a9-f734-448b-afdb-0576c80ba56b",
+          "questionId": "3ed967a9-f734-448b-afdb-0576c80ba56b",
+          "answerChoince": "e"
+        }
+      ]
+    },
+    {
+      "id": "f3b12085-f13a-4912-bb6d-34d6e8a9538d",
+      "username": "w",
+      "score": 0,
+      "answers": [
+        {
+          "id": "5620d569-c4ba-4350-ab58-19f59b204e64",
+          "questionId": "5620d569-c4ba-4350-ab58-19f59b204e64",
+          "answerChoince": "p"
+        },
+        {
+          "id": "5835223a-bfe8-43b7-a17e-a334be27abcc",
+          "questionId": "5835223a-bfe8-43b7-a17e-a334be27abcc",
+          "answerChoince": "2"
+        },
+        {
+          "id": "2cd1d2ae-abfa-4442-9916-b0c8388d59fe",
+          "questionId": "2cd1d2ae-abfa-4442-9916-b0c8388d59fe",
+          "answerChoince": "2"
+        }
+      ]
+    }
+  ]
+}

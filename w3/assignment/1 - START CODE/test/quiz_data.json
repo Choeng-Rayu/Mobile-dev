@@ -1,0 +1,72 @@
+{
+  "id": "quiz-001",
+  "questions": [
+    {
+      "id": "q-001",
+      "title": "Capital of France?",
+      "choices": ["Paris", "London", "Rome"],
+      "goodChoice": "Paris",
+      "points": 10
+    },
+    {
+      "id": "q-002",
+      "title": "2 + 2 = ?",
+      "choices": ["2", "4", "5"],
+      "goodChoice": "4",
+      "points": 50
+    },
+    {
+      "id": "q-003",
+      "title": "What is the capital of Japan?",
+      "choices": ["Tokyo", "Osaka", "Kyoto"],
+      "goodChoice": "Tokyo",
+      "points": 10
+    }
+  ],
+  "players": [
+    {
+      "id": "p-001",
+      "username": "rayu",
+      "scores": 60,
+      "answers": [
+        {
+          "id": "a-001",
+          "questionId": "q-001",
+          "answerChoice": "Paris"
+        },
+        {
+          "id": "a-002",
+          "questionId": "q-002",
+          "answerChoice": "4"
+        },
+        {
+          "id": "a-003",
+          "questionId": "q-003",
+          "answerChoice": "Osaka"
+        }
+      ]
+    },
+    {
+      "id": "p-002",
+      "username": "john",
+      "scores": 20,
+      "answers": [
+        {
+          "id": "a-004",
+          "questionId": "q-001",
+          "answerChoice": "London"
+        },
+        {
+          "id": "a-005",
+          "questionId": "q-002",
+          "answerChoice": "4"
+        },
+        {
+          "id": "a-006",
+          "questionId": "q-003",
+          "answerChoice": "Tokyo"
+        }
+      ]
+    }
+  ]
+}

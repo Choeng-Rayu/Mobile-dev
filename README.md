@@ -29,5 +29,5 @@ Thank you!
 
 ---
 
-**Student:** Choeng Rayu  
-**Year 3 Mobile Development Course**
+**Student:** Choeng Rayu, G2, IDTB100252
+**Year 3 T1 Mobile Development Course**
