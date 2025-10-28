@@ -127,23 +127,215 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+
+
+// void main() {
+//   runApp(
+//     MaterialApp(
+//       title: 'My app', // used by the OS task switcher
+//       home: Scaffold(
+//         appBar: AppBar(
+//           backgroundColor:  Colors.pink[800],
+//           title: Text("Welcome")
+//         ),
+//         body: const Center(
+//           child: Text('Hello G1 and G3 Students !'),
+//         ),
+//       ),
+//     ),
+//   );
+// }
+// void main() {
+//   runApp(
+//     const MaterialApp(
+//       title: 'My APP',
+//       home: Scaffold(
+//         body: Center(
+//           child: Text(
+//             'Hello my name is Ronnan!',
+//             style: TextStyle(
+//               fontSize: 20,
+//               color: Colors.orange,
+//             ),
+//           ),
+//         ),
+//       ),
+//     ),
+//   );
+// }
+
+// void main() {
+//   runApp(
+//     MaterialApp(
+//       home: Scaffold(
+//         body: Container(
+//           padding: const EdgeInsets.all(50.0),
+//           color:   const Color.fromARGB(255, 99, 162, 214),
+//           child: Container(
+//             color: Colors.blue,
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(10.0),
+//             ),
+//             child: const Center(
+//               // color: Colors.white,
+//               child: Text(
+//                 'CADT STUDENTS',
+//                 style: TextStyle(
+//                   fontSize: 30,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     )
+//   );
+// }
+
+
+
+// import 'package:flutter/material.dart';
+
+// void main() {
+//   runApp(
+//     MaterialApp(
+//       title: 'My app',
+//       home: Scaffold(
+//         appBar: AppBar(
+//           backgroundColor: const Color.fromARGB(255, 255, 201, 224),
+//           title: const Text("Welcome"),
+//         ),
+//         body: Container(
+//           margin: const EdgeInsets.all(30),
+//           padding: const EdgeInsets.all(20),
+//           color: const Color.fromARGB(255, 113, 179, 234),
+//           child: Container(
+//             decoration: BoxDecoration(
+//               color: Colors.blue,
+//               borderRadius: BorderRadius.circular(20),
+//             ),
+//             child: const Center(
+//               child: Text(
+//                 'Hello all G2 Students !',
+//                 style: TextStyle(color: Colors.yellow, fontSize: 50),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     ),
+//   );
+// }
+
+
+// void main (){
+//   runApp(
+//     MaterialApp(
+//       title: 'My App',
+//       home: Container(
+//       // backgroundColor: const Color.fromARGB(255, 255, 201, 224),
+//       margin: const EdgeInsets.all(30.0),
+//         padding: const EdgeInsets.all(10),
+//         child: Container(
+//           decoration: const BoxDecoration(
+//             color: Colors.blue,
+//           ),
+//           child: const Center(
+//             child: Text(
+//               'CADT STUDENTS',
+//               style: TextStyle(
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+
+//     ),
+//   );
+// }
+
+
+
+
+
+import 'package:flutter/material.dart';
+
+
+
+
 
 
 void main() {
   runApp(
     MaterialApp(
-      title: 'My app' // used by the OS task switcher
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor:  Colors.pink[800],
-          title: Text("Welcome"
-
+        body: Center(
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.all(30),
+                padding: const EdgeInsets.all(40),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF4E7DF5), Color(0xFF0B3CBD)],
+                  ),
+                ),
+                child: const Text(
+                  "HELLO 1",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(30),
+                padding: const EdgeInsets.all(40),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  gradient: const  LinearGradient(
+                    colors: [Color(0xFF4E7DF5), Color(0xFF0B3CBD)],
+                  ),
+                ),
+                child: const Text(
+                  "HELLO 2",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(30),
+                padding: const EdgeInsets.all(40),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  gradient:const  LinearGradient(
+                    colors: [Color(0xFF4E7DF5), Color(0xFF0B3CBD)],
+                  ),
+                ),
+                child: const Text(
+                  "HELLO 3",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
-        body: const Center(
-          child: Text('Hello G1 and G3 Students !'),
         ),
       ),
     ),
   );
 }
+
+
+

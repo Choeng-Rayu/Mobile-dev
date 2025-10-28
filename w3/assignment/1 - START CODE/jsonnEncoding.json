@@ -1,0 +1,22 @@
+{
+    "questions": [
+        {
+            "text": "What is 2+2?",
+            "answer": "4"
+        },
+        {
+            "text": "What is the capital of France?",
+            "answer": "Paris"
+        }
+    ]
+}
+
+
+
+
+final quizData = {
+  'questions': [
+    {'text': 'What is 2+2?', 'answer': '4'},
+    {'text': 'What is the capital of France?', 'answer': 'Paris'}
+  ]
+};

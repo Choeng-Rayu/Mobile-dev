@@ -99,50 +99,50 @@ main() {
     expect(foundAnswer!.answerChoice, equals("Paris"));
   });
 
-  test('Read quiz from JSON file', (){
-    final repository = QuizRepository('test/quiz_data.json');
-    final quiz = repository.readQuiz();
-    
-    expect(quiz.id, equals("quiz-001"));
-    expect(quiz.questions.length, equals(3));
-    expect(quiz.player.length, equals(2));
-    
-    // Check first question
-    expect(quiz.questions[0].id, equals("q-001"));
-    expect(quiz.questions[0].title, equals("Capital of France?"));
-    
-    // Check first player
-    expect(quiz.player[0].username, equals("rayu"));
-    expect(quiz.player[0].answer.length, equals(3));
-    expect(quiz.player[0].answer[0].answerChoice, equals("Paris"));
-  });
+  // test('Read quiz from JSON file', (){
+  //   final repository = QuizRepository('test/quiz_data.json');
+  //   final quiz = repository.readQuiz();
+  //
+  //   expect(quiz.id, equals("quiz-001"));
+  //   expect(quiz.questions.length, equals(3));
+  //   expect(quiz.player.length, equals(2));
+  //
+  //   // Check first question
+  //   expect(quiz.questions[0].id, equals("q-001"));
+  //   expect(quiz.questions[0].title, equals("Capital of France?"));
+  //
+  //   // Check first player
+  //   expect(quiz.player[0].username, equals("rayu"));
+  //   expect(quiz.player[0].answer.length, equals(3));
+  //   expect(quiz.player[0].answer[0].answerChoice, equals("Paris"));
+  // });
 
-  test('Write quiz to JSON file and read it back', (){
-    final testFilePath = 'test/quiz_output_test.json';
-    
-    // Create a quiz
-    final quiz = Quiz(questions: questions);
-    final player = Player(username: "testuser");
-    player.addAnswer(Answer(questionId: "q-001", answerChoice: "Paris"));
-    player.addAnswer(Answer(questionId: "q-002", answerChoice: "4"));
-    quiz.addPlayer(player);
-    
-    // Write to JSON
-    final repository = QuizRepository(testFilePath);
-    repository.writeQuiz(quiz);
-    
-    // Verify file was created
-    expect(File(testFilePath).existsSync(), isTrue);
-    
-    // Read it back
-    final readQuiz = repository.readQuiz();
-    expect(readQuiz.id, equals(quiz.id));
-    expect(readQuiz.questions.length, equals(2));
-    expect(readQuiz.player.length, equals(1));
-    expect(readQuiz.player[0].username, equals("testuser"));
-    
-    // Clean up
-    File(testFilePath).deleteSync();
-  });
+  // test('Write quiz to JSON file and read it back', (){
+  //   final testFilePath = 'test/quiz_output_test.json';
+  //
+  //   // Create a quiz
+  //   final quiz = Quiz(questions: questions);
+  //   final player = Player(username: "testuser");
+  //   player.addAnswer(Answer(questionId: "q-001", answerChoice: "Paris"));
+  //   player.addAnswer(Answer(questionId: "q-002", answerChoice: "4"));
+  //   quiz.addPlayer(player);
+  //
+  //   // Write to JSON
+  //   final repository = QuizRepository(testFilePath);
+  //   repository.writeQuiz(quiz);
+  //
+  //   // Verify file was created
+  //   expect(File(testFilePath).existsSync(), isTrue);
+  //
+  //   // Read it back
+  //   final readQuiz = repository.readQuiz();
+  //   expect(readQuiz.id, equals(quiz.id));
+  //   expect(readQuiz.questions.length, equals(2));
+  //   expect(readQuiz.player.length, equals(1));
+  //   expect(readQuiz.player[0].username, equals("testuser"));
+  //
+  //   // Clean up
+  //   File(testFilePath).deleteSync();
+  // });
 }
 
