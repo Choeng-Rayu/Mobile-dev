@@ -1,0 +1,56 @@
+@startuml
+left to right direction
+actor "Patient" as P
+actor "Family Member" as F
+actor "System (OCR & Reminder Engine)" as S
+
+rectangle "DasTern Mobile Application" {
+  
+  (Create Account / Login) as UC1
+  (View Dashboard) as UC2
+  (Scan Prescription via OCR) as UC3
+  (Upload or Capture Image) as UC4
+  (Preview & Edit OCR Result) as UC5
+  (Generate Medication Reminder) as UC6
+  (Use Offline Mode) as UC7
+  (Connect Family Account via Token) as UC8
+  (Receive Khmer Voice/Text Reminder) as UC9
+  (Trigger Family Alert if Unresponsive) as UC10
+
+  P --> UC1
+  P --> UC2
+  P --> UC3
+  UC3 --> UC4
+  UC3 --> UC5
+  UC5 --> UC6
+  P --> UC7
+  P --> UC8
+  P --> UC9
+  S --> UC9 : "Send Alert / Reminder"
+  S --> UC10 : "After 3 missed alerts"
+  UC10 --> F : "Notify via App/Voice"
+
+  F --> UC8 : "Join via Token"
+  F --> UC10 : "Receive Notification"
+}
+
+note right of UC3
+OCR scans text from 
+prescription and extracts:
+- Medicine name
+- Dosage
+- Schedule
+end note
+
+note right of UC9
+Text-to-speech reminder
+in Khmer, works offline
+end note
+
+note right of UC10
+If patient ignores 3 alerts,
+system automatically notifies
+the connected family member
+end note
+
+@enduml
