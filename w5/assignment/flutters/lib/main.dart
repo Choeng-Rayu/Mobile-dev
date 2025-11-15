@@ -40,9 +40,7 @@ import 'package:flutter/material.dart';
 //     MaterialApp(
 //       home: Scaffold(
 //         backgroundColor: Colors.grey[600],
-//         appBar: AppBar(
-//           title: const Text('My Hobbies'),
-//         ),
+//         body: const Home(),
 //       ),
 //     ),
 //   );
@@ -126,45 +124,45 @@ import 'package:flutter/material.dart';
 
 
 // /// Exercise 3
-// import 'ex3/ex3.dart';
+import 'ex3/ex3.dart';
 
-// void main() {
-//   runApp(
-//     MaterialApp(
-//       home: Scaffold(
-//         backgroundColor: Colors.blue,
-//         appBar: AppBar(
-//           title: const Text('Products'),
-//         ),
-//         body: const Padding(
-//           padding: EdgeInsets.all(16),
-//           child: Column(
-//             children: [
-//               // Using ProductCard with Product enum
-//               ProductCard(
-//                 product: Product.dart,
-//               ),
-//               SizedBox(height: 16),
-//               ProductCard(
-//                 product: Product.flutter,
-//               ),
-//               SizedBox(height: 16),
-//               ProductCard(
-//                 product: Product.firebase,
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     ),
-//   );
-// }
+void main() {
+  runApp(
+    MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.blue,
+        appBar: AppBar(
+          title: const Text('Products'),
+        ),
+        body: const Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              // Using ProductCard with Product enum
+              ProductCard(
+                product: Product.dart,
+              ),
+              SizedBox(height: 16),
+              ProductCard(
+                product: Product.flutter,
+              ),
+              SizedBox(height: 16),
+              ProductCard(
+                product: Product.firebase,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
 
 
 /// Exercise 4 - Weather Forecast
-import 'ex4/ex4.dart' as ex4;
+// import 'ex4/ex4.dart' as ex4;
 
-void main() {
-  runApp(const ex4.MyApp());
-}
+// void main() {
+//   runApp(const ex4.MyApp());
+// }
 

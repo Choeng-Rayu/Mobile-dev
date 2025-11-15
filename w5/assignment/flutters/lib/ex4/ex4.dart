@@ -50,6 +50,7 @@ enum TypeWeather {
     required this.temp,
     required this.gradientColor,
   });
+  
 }
 
 class MyApp extends StatelessWidget {

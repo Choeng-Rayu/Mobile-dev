@@ -29,7 +29,7 @@ class HobbyCard extends StatelessWidget {
             // decoration: BoxDecoration(
             //   color: Colors.white.withOpacity(0.3),
             //   // shape: BoxShape.circle,
-            // ),
+            // ),00
             padding: const EdgeInsets.all(10),
             child: Icon(
               icon,
