@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-
-const List<String> weatherImages = [
-  'lib/assets/image/fall.png',
+const List<String> franceSeasons = [
   'lib/assets/image/Spring.png',
   'lib/assets/image/Summer.png',
+  'lib/assets/image/fall.png',
   'lib/assets/image/Winter.png',
 ];
-
+const List<String> cambodiaSeasons = [
+  'lib/assets/image/Spring.png',
+  'lib/assets/image/Summer.png',
+];
 
 class CountrySeasonCard extends StatefulWidget {
   final String countryName;
@@ -23,7 +25,11 @@ class CountrySeasonCardState extends State<CountrySeasonCard> {
 
   void changeWeather() {
     setState(() {
-      currentWeatherIndex = (currentWeatherIndex + 1) % weatherImages.length;
+      if (widget.countryName == 'CAMBODIA') {
+        currentWeatherIndex = (currentWeatherIndex + 1) % cambodiaSeasons.length;
+      } else {
+        currentWeatherIndex = (currentWeatherIndex + 1) % franceSeasons.length;
+      }
     });
   }
 
@@ -31,72 +37,98 @@ class CountrySeasonCardState extends State<CountrySeasonCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: changeWeather,
-      child: Card(
-        elevation: 8,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+      child: Container(
+        width: 150,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey, width: 1),
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.white,
         ),
-        child: Container(
-          width: 200,
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                weatherImages[currentWeatherIndex],
-                width: 160,
-                height: 160,
+        child: Column(
+          children: [
+            
+            Container(
+              width: 150,
+              height: 200,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(12),
+                  topRight: Radius.circular(12),
+                ),
+              ),
+              child: Image.asset(
+                widget.countryName == 'CAMBODIA'
+                  ? cambodiaSeasons[currentWeatherIndex]
+                  : franceSeasons[currentWeatherIndex],
+                width: 150,
+                height: 200,
                 fit: BoxFit.cover,
               ),
-              const SizedBox(height: 12),
-              Text(
+            ),
+
+            const SizedBox(height: 10),
+
+            // ==== Country Name ====
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Text(
                 widget.countryName,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
   }
 }
 
+void main() {
+  runApp(
+    const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
 
-void main() => runApp(
-  const MaterialApp(
-    home: Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'SEASONS',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2,
+              children: [
+                // PAGE TITLE
+
+                Text(
+                  'SEASONS',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.5,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 40),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CountrySeasonCard(countryName: 'FRANCE'),
-                  const SizedBox(width: 30),
-                  CountrySeasonCard(countryName: 'CAMBODIA'),
-                ],
-              ),
-            ],
+                // decoration: const BoxDecoration(
+                //   borderRadius: BorderRadius.all(15),
+                //   width: 1,
+                // ),
+                SizedBox(height: 40),
+
+                // TWO CARDS
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CountrySeasonCard(countryName: 'FRANCE'),
+                    SizedBox(width: 30),
+                    CountrySeasonCard(countryName: 'CAMBODIA'),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     ),
-
-  ),
-);
+  );
+}
