@@ -41,12 +41,10 @@ class CountrySeasonCardState extends State<CountrySeasonCard> {
         width: 150,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey, width: 1),
-          borderRadius: BorderRadius.circular(12),
           color: Colors.white,
         ),
         child: Column(
           children: [
-            
             Container(
               width: 150,
               height: 200,
@@ -65,10 +63,7 @@ class CountrySeasonCardState extends State<CountrySeasonCard> {
                 fit: BoxFit.cover,
               ),
             ),
-
             const SizedBox(height: 10),
-
-            // ==== Country Name ====
             Padding(
               padding: const EdgeInsets.only(bottom: 12),
               child: Text(
@@ -86,6 +81,44 @@ class CountrySeasonCardState extends State<CountrySeasonCard> {
   }
 }
 
+class SeasonsCard extends StatelessWidget {
+  const SeasonsCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey, width: 1),
+        borderRadius: BorderRadius.circular(15),
+        // color: Colors.grey[200],
+      ),
+      padding: const EdgeInsets.all(30),
+      child: const Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text(
+            'SEASONS',
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.5,
+            ),
+          ),
+          const SizedBox(height: 30),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CountrySeasonCard(countryName: 'FRANCE'),
+              const SizedBox(width: 30),
+              CountrySeasonCard(countryName: 'CAMBODIA'),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 void main() {
   runApp(
     const MaterialApp(
@@ -95,37 +128,7 @@ void main() {
         body: Center(
           child: Padding(
             padding: EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-
-              children: [
-                // PAGE TITLE
-
-                Text(
-                  'SEASONS',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-                // decoration: const BoxDecoration(
-                //   borderRadius: BorderRadius.all(15),
-                //   width: 1,
-                // ),
-                SizedBox(height: 40),
-
-                // TWO CARDS
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CountrySeasonCard(countryName: 'FRANCE'),
-                    SizedBox(width: 30),
-                    CountrySeasonCard(countryName: 'CAMBODIA'),
-                  ],
-                ),
-              ],
-            ),
+            child: SeasonsCard(),
           ),
         ),
       ),
