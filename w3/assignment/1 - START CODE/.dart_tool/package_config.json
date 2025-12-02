@@ -314,10 +314,10 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-10-21T04:15:10.536414Z",
+  "generated": "2025-12-01T06:05:27.535038Z",
   "generator": "pub",
-  "generatorVersion": "3.5.3",
+  "generatorVersion": "3.5.4",
   "flutterRoot": "file:///home/choeng-rayu/flutter",
-  "flutterVersion": "3.24.3",
+  "flutterVersion": "3.24.5",
   "pubCache": "file:///home/choeng-rayu/.pub-cache"
 }
