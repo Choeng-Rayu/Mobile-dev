@@ -7,14 +7,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutters/ui/quiz_app.dart';
+import '../lib/services/quiz_file_provider.dart';
 
-import 'package:flutters/main.dart';
 
 void main() {
+final quizRepository = QuizRepository('lib/data/repositories/quiz_repository.json');
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
-
+    // await tester.pumpWidget(QuizApp(quizData: quizRepository.readQuiz()));
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
     expect(find.text('1'), findsNothing);
