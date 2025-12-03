@@ -48,6 +48,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
             score: finalScore,
             totalQuestions: widget.quizData.questions.length,
             player: widget.player,
+            questions: widget.quizData.questions,
           ),
         ),
       );

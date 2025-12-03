@@ -1,0 +1,30 @@
+@startuml Quiz App Component Diagram
+
+!define COMPONENT_COLOR #E1F5FF
+!define BORDER_COLOR #0277BD
+
+skinparam {
+    backgroundColor white
+    component {
+        BackgroundColor COMPONENT_COLOR
+        BorderColor BORDER_COLOR
+        BorderThickness 2
+    }
+}
+
+title Quiz App - Component Diagram
+
+component "QuizApp\n(StatelessWidget)" as QuizApp
+
+component "WelcomeScreen\n(StatelessWidget)" as WelcomeScreen
+
+component "QuestionScreen\n(StatefulWidget)" as QuestionScreen
+
+component "ResultScreen\n(StatelessWidget)" as ResultScreen
+
+QuizApp --> WelcomeScreen : "quizData"
+WelcomeScreen --> QuestionScreen : "Navigator.push\n(quizData, player)"
+QuestionScreen --> ResultScreen : "Navigator.push\n(score, player, questions)"
+ResultScreen --> WelcomeScreen : "Navigator.popUntil\n(restart)"
+
+@enduml

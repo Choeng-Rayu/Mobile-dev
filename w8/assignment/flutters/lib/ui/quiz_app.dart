@@ -1,49 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutters/model/quiz.dart';
-import 'package:flutters/services/quiz_file_provider.dart';
+import 'package:flutters/data/repositories/quizData.dart';
 import './screens/welcome_screen.dart';
 
-class QuizApp extends StatefulWidget {
+class QuizApp extends StatelessWidget {
   const QuizApp({super.key});
-  
-  @override
-  State<QuizApp> createState() => _QuizAppState();
-}
-
-class _QuizAppState extends State<QuizApp> {
-  Quiz? quizData;
-  bool isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadQuizData();
-  }
-
-  Future<void> _loadQuizData() async {
-    // 1 - Load quiz data from JSON file (async)
-    const String filePath = 'lib/data/repositories/quiz_repository.json';
-    final QuizRepository repository = QuizRepository(filePath);
-    final loadedQuiz = await repository.readQuizAsync();
-    
-    setState(() {
-      quizData = loadedQuiz;
-      isLoading = false;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    // Show loading while quiz data is being fetched
-    if (isLoading) {
-      return const MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
-      );
-    }
+    // Get quiz data from QuizData class
+    final quizData = QuizData.getJokeQuiz();
 
     return MaterialApp(
       title: 'Quiz App',
@@ -51,8 +16,7 @@ class _QuizAppState extends State<QuizApp> {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      // WelcomeScreen is always home - navigation happens via Navigator.push
-      home: WelcomeScreen(quizData: quizData!),
+      home: WelcomeScreen(quizData: quizData),
     );
   }
 }

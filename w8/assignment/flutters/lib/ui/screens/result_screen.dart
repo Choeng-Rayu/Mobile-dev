@@ -1,31 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutters/model/quiz.dart';
 import '../theme/theme.dart';
-import '../widgets/app_button.dart';
 
 class ResultScreen extends StatelessWidget {
   final int score;
   final int totalQuestions;
   final Player player;
+  final List<Question> questions;
 
   const ResultScreen({
     super.key,
     required this.score,
     required this.totalQuestions,
     required this.player,
+    required this.questions,
   });
 
-  void _goHome(BuildContext context) {
+  void _restartQuiz(BuildContext context) {
     // Pop all routes until we reach WelcomeScreen (the first route)
     Navigator.of(context).popUntil((route) => route.isFirst);
   }
 
   @override
   Widget build(BuildContext context) {
-    // Calculate percentage based on answers
-    final correctAnswers = player.answer.length > 0 
-        ? (score > 0 ? 'Great job!' : 'Try again!') 
-        : 'No answers';
+    // Count correct answers
+    int correctCount = 0;
+    for (var answer in player.answer) {
+      final question = Question.findQuestionById(questions, answer.questionId);
+      if (question != null && answer.isGood(question)) {
+        correctCount++;
+      }
+    }
 
     return Scaffold(
       backgroundColor: ColorsTheme.layoutColor[5],
@@ -34,179 +39,34 @@ class ResultScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              // Header with Trophy/Result icon and title
-              Column(
-                children: [
-                  Icon(
-                    score > 0 ? Icons.emoji_events : Icons.refresh,
-                    size: 80,
-                    color: ColorsTheme.layoutColor[0],
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Quiz Complete!',
-                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    correctAnswers,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: score > 0 ? Colors.green : Colors.orange,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  
-                  // Score display card
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: ColorsTheme.layoutColor[0],
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Player: ${player.username}',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.white70,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          '$score points',
-                          style: const TextStyle(
-                            fontSize: 36,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          'Questions answered: $totalQuestions',
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.white70,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  
-                  const Text(
-                    'Answer History',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              // Header: "You answered X on Y !"
+              Text(
+                'You answered $correctCount on $totalQuestions !',
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
+              const SizedBox(height: 30),
               
-              const SizedBox(height: 15),
-              
-              // Scrollable answer history
+              // Answer list
               Expanded(
                 child: ListView.builder(
                   itemCount: player.answer.length,
                   itemBuilder: (context, index) {
                     final answer = player.answer[index];
-                    final question = _findQuestionById(answer.questionId);
+                    final question = Question.findQuestionById(questions, answer.questionId);
                     
                     if (question == null) return const SizedBox.shrink();
                     
                     final isCorrect = answer.isGood(question);
                     
-                    return Card(
-                      margin: const EdgeInsets.symmetric(vertical: 8),
-                      elevation: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Question number and status
-                            Row(
-                              children: [
-                                Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: isCorrect 
-                                        ? Colors.green 
-                                        : Colors.red,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      '${index + 1}',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        question.title,
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        '${question.points} points',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.grey[600],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Icon(
-                                  isCorrect ? Icons.check_circle : Icons.cancel,
-                                  color: isCorrect ? Colors.green : Colors.red,
-                                  size: 28,
-                                ),
-                              ],
-                            ),
-                            
-                            const SizedBox(height: 12),
-                            const Divider(),
-                            const SizedBox(height: 12),
-                            
-                            // Correct answer and user's answer
-                            Text(
-                              'Correct Answer: ${question.goodChoice}',
-                              style: const TextStyle(
-                                fontSize: 13,
-                                color: Colors.green,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              'Your Answer: ${answer.answerChoice}',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: isCorrect ? Colors.green : Colors.red,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    return _buildQuestionResult(
+                      questionNumber: index + 1,
+                      question: question,
+                      userAnswer: answer.answerChoice,
+                      isCorrect: isCorrect,
                     );
                   },
                 ),
@@ -214,11 +74,27 @@ class ResultScreen extends StatelessWidget {
               
               const SizedBox(height: 20),
               
-              // Back to Home button
-              AppButton(
-                'Back to Home',
-                onTap: () => _goHome(context),
-                icon: Icons.home,
+              // Restart Quiz button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => _restartQuiz(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black87,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  child: const Text(
+                    'Restart Quiz',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -227,16 +103,99 @@ class ResultScreen extends StatelessWidget {
     );
   }
   
-  /// Helper method to find question by ID
-  Question? _findQuestionById(String questionId) {
-    try {
-      return Question.findQuestionById(player.answer.map((a) {
-        // This is a workaround - we need the quiz questions
-        return null;
-      }).toList() as List<Question>, questionId);
-    } catch (e) {
-      return null;
-    }
+  /// Build a question result card matching the image design
+  Widget _buildQuestionResult({
+    required int questionNumber,
+    required Question question,
+    required String userAnswer,
+    required bool isCorrect,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: ColorsTheme.layoutColor[5],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Question number circle (green if correct, red if wrong)
+          Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: isCorrect ? Colors.green : Colors.red,
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Text(
+                '$questionNumber',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 16),
+          // Question and choices
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  question.title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                // List all choices with checkmark for correct answer
+                ...question.choices.map((choice) {
+                  final isGoodChoice = choice == question.goodChoice;
+                  final isUserChoice = choice == userAnswer;
+                  
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 2),
+                    child: Row(
+                      children: [
+                        // Show checkmark for correct answer
+                        if (isGoodChoice)
+                          const Icon(
+                            Icons.check,
+                            color: Colors.green,
+                            size: 18,
+                          )
+                        else
+                          const SizedBox(width: 18),
+                        const SizedBox(width: 8),
+                        Text(
+                          choice,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: isGoodChoice
+                                ? Colors.green
+                                : (isUserChoice && !isGoodChoice)
+                                    ? Colors.red
+                                    : Colors.black87,
+                            fontWeight: isGoodChoice || isUserChoice
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
  
