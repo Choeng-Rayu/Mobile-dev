@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutters/model/quiz.dart';
+import 'package:flutters/services/quiz_file_provider.dart';
 import '../theme/theme.dart';
 import '../widgets/app_button.dart';
 import 'question_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   final Quiz quizData;
+  final QuizRepository repository;
 
   const WelcomeScreen({
     super.key,
     required this.quizData,
+    required this.repository,
   });
 
   @override
@@ -45,6 +48,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         builder: (context) => QuestionScreen(
           quizData: widget.quizData,
           player: player,
+          repository: widget.repository,
         ),
       ),
     );

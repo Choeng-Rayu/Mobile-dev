@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutters/model/quiz.dart';
+import 'package:flutters/services/quiz_file_provider.dart';
 import '../theme/theme.dart';
 import '../widgets/app_button.dart';
 import 'result_screen.dart';
@@ -7,11 +8,13 @@ import 'result_screen.dart';
 class QuestionScreen extends StatefulWidget {
   final Quiz quizData;
   final Player player;
+  final QuizRepository repository;
 
   const QuestionScreen({
     super.key,
     required this.quizData,
     required this.player,
+    required this.repository,
   });
 
   @override
@@ -48,6 +51,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
             score: finalScore,
             totalQuestions: widget.quizData.questions.length,
             player: widget.player,
+            questions: widget.quizData.questions,
+            quiz: widget.quizData,
+            repository: widget.repository,
           ),
         ),
       );

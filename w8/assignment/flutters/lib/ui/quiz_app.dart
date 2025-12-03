@@ -13,6 +13,7 @@ class QuizApp extends StatefulWidget {
 class _QuizAppState extends State<QuizApp> {
   Quiz? quizData;
   bool isLoading = true;
+  late QuizRepository repository;
 
   @override
   void initState() {
@@ -22,8 +23,9 @@ class _QuizAppState extends State<QuizApp> {
 
   Future<void> _loadQuizData() async {
     // 1 - Load quiz data from JSON file (async)
+    // First tries local storage, then falls back to assets
     const String filePath = 'lib/data/repositories/quiz_repository.json';
-    final QuizRepository repository = QuizRepository(filePath);
+    repository = QuizRepository(filePath);
     final loadedQuiz = await repository.readQuizAsync();
     
     setState(() {
@@ -52,7 +54,7 @@ class _QuizAppState extends State<QuizApp> {
         useMaterial3: true,
       ),
       // WelcomeScreen is always home - navigation happens via Navigator.push
-      home: WelcomeScreen(quizData: quizData!),
+      home: WelcomeScreen(quizData: quizData!, repository: repository),
     );
   }
 }
