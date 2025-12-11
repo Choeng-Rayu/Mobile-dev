@@ -15,9 +15,22 @@ class ExpensesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: expenses.length,
-      itemBuilder: (context, index) => ExpenseItem(
-        expense: expenses[index],
-        onRemove: () => onRemove?.call(expenses[index]),
+      itemBuilder: (context, index) => Dismissible(
+        key: ValueKey(expenses[index].id),
+        direction: DismissDirection.endToStart,
+        onDismissed: (direction) {
+          onRemove?.call(expenses[index]);
+        },
+        background: Container(
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.only(right: 20),
+          color: Colors.red,
+          child: const Icon(Icons.delete, color: Colors.white),
+        ),
+        child: ExpenseItem(
+          expense: expenses[index],
+          onRemove: () => onRemove?.call(expenses[index]),
+        ),
       ),
     );
   }
@@ -47,7 +60,7 @@ class ExpenseItem extends StatelessWidget {
   }
 
   String get expenseDate {
-    return "11/54/25";
+    return "${expense.date.day}/${expense.date.month}/${expense.date.year}";
   }
 
   @override
@@ -66,7 +79,14 @@ class ExpenseItem extends StatelessWidget {
                     expense.title,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text("${expense.amount.toStringAsPrecision(2)} \$"),
+                  Text(
+                    "\$${expense.amount.toStringAsFixed(2)}",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.green[700],
+                    ),
+                  ),
                 ],
               ),
               Spacer(),
